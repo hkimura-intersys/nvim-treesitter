@@ -1,4 +1,4 @@
-; Core grammar injections
+; === BEGIN CORE ===
 (embedded_html
   (angled_bracket_fenced_text) @injection.content
   (#set! injection.language "html"))
@@ -27,7 +27,8 @@
 ] @injection.content
   (#set! injection.language "comment"))
 
-; UDL grammar injections
+; === END CORE ===
+; === BEGIN UDL ===
 ; Keywords, one of type language = "python", none of type codemode
 ; External method body injection based on [ Language = ... ]
 (method_definition
@@ -35,7 +36,7 @@
     (method_keyword_language
       (rhs) @_lang))
   (external_method_body_content) @injection.content
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_lang "^[Pp][Yy][Tt][Hh][Oo][Nn]$")
   (#set! injection.language "python"))
 
@@ -44,7 +45,7 @@
     (method_keyword_language
       (rhs) @_lang))
   (external_method_body_content) @injection.content
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_lang "^[Tt][Ss][Qq][Ll]$")
   (#set! injection.language "tsql"))
 
@@ -53,7 +54,7 @@
     (method_keyword_language
       (rhs) @_lang))
   (external_method_body_content) @injection.content
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_lang "^[Ii][Ss][Pp][Ll]$")
   (#set! injection.language "ispl"))
 
@@ -64,7 +65,7 @@
       (method_keyword_language
         (rhs) @_lang))
     (external_method_body_content) @injection.content))
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_lang "^[Pp][Yy][Tt][Hh][Oo][Nn]$")
   (#set! injection.language "python"))
 
@@ -75,7 +76,7 @@
       (method_keyword_language
         (rhs) @_lang))
     (external_method_body_content) @injection.content))
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_lang "^[Tt][Ss][Qq][Ll]$")
   (#set! injection.language "tsql"))
 
@@ -89,7 +90,7 @@
   (query_body
     (query_body_content) @injection.content)
   (#set! injection.language "sql")
-  (#set! injection.include-children))
+  (#set! injection.include-children "true"))
 
 ; XDATA blocks:
 ; - xdata_any requires a keyword list that includes MimeType
@@ -104,7 +105,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt "^\"?text/markdown\"?$")
   (#set! injection.language "markdown"))
 
@@ -115,7 +116,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt
     "^\"?([Tt][Ee][Xx][Tt]|[Aa][Pp][Pp][Ll][Ii][Cc][Aa][Tt][Ii][Oo][Nn])/[Xx][Mm][Ll]\"?$")
   (#set! injection.language "xml"))
@@ -127,7 +128,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt "^\"?text/html\"?$")
   (#set! injection.language "html"))
 
@@ -138,7 +139,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt "^\"?application/json\"?$")
   (#set! injection.language "json"))
 
@@ -149,7 +150,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt
     "^\"?([Tt][Ee][Xx][Tt]|[Aa][Pp][Pp][Ll][Ii][Cc][Aa][Tt][Ii][Oo][Nn])/[Yy][Aa][Mm][Ll]\"?$")
   (#set! injection.language "yaml"))
@@ -161,7 +162,7 @@
       (xdata_keyword_mimetype
         (rhs) @_mt))
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#match? @_mt "^\"?text/css\"?$")
   (#set! injection.language "css"))
 
@@ -172,7 +173,7 @@
   (xdata_xml
     (xdata_keywords)?
     (external_method_body_content) @injection.content)
-  (#set! injection.include-children)
+  (#set! injection.include-children "true")
   (#set! injection.language "xml"))
 
 ; Storage definition is XML
@@ -180,4 +181,6 @@
   (storage_body
     (external_method_body_content) @injection.content)
   (#set! injection.language "xml")
-  (#set! injection.include-children))
+  (#set! injection.include-children "true"))
+
+; === END UDL ===
